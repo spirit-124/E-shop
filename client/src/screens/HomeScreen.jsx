@@ -8,8 +8,8 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await axios.get("https://dummyjson.com/products");
-      setProducts(data.products);
+      const { data } = await axios.get("http://localhost:8080/api/v1/products");
+      setProducts(data);
     };
     fetchProducts();
   }, []);
@@ -20,7 +20,7 @@ const HomeScreen = () => {
       <Row>
         {/* console.log(produc) */}
         {products.map((product) => (
-          <Col key={product.id} md={3}>
+          <Col key={product._id} md={3}>
             <ProductScreen product={product} />
           </Col>
         ))}

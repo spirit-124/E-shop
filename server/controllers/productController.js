@@ -8,9 +8,20 @@ const getAllProducts = async (req, res) => {
   } catch (error) {
     res.status(404).json({
       error: error.message,
-      message: "Product not found",
+      message: "Products not found",
     });
   }
 };
 
-module.exports = { getAllProducts };
+const getSingleProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      res.status(200).json(product);
+    }
+  } catch (error) {
+    res.status(404).json({ error, message: "Product not found" });
+  }
+};
+
+module.exports = { getAllProducts, getSingleProduct };
