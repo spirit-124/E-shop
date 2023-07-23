@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { productDetails } from "../actions/ProductListAction";
 import Rating from "../components/Rating";
 import {
@@ -15,7 +15,8 @@ import {
 } from "react-bootstrap";
 import Loader from "../components/shared/Loader";
 
-const ProductDetailScreen = ({ history }) => {
+const ProductDetailScreen = () => {
+  const navigate = useNavigate();
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetails);
@@ -27,7 +28,8 @@ const ProductDetailScreen = ({ history }) => {
   }, []);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${id}?qty=${qty}`);
+    // history.push(`/cart/${id}?qty=${qty}`);
+    navigate(`/cart/${id}?qty=${qty}`);
   };
 
   return (
